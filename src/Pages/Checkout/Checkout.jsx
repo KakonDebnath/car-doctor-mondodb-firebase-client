@@ -8,7 +8,7 @@ const Checkout = () => {
     const { id } = useParams();
     const [service, setService] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${id}`)
+        fetch(`https://cars-doctor-server-chi.vercel.app/services/${id}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [])
@@ -25,7 +25,7 @@ const Checkout = () => {
             name, bookingDate, phone, email, message, service
         }
         console.log(orderInfo);
-        fetch('http://localhost:5000/booking', {
+        fetch('https://cars-doctor-server-chi.vercel.app/booking', {
             method: "POST",
             headers:{
                 "content-type": "application/json"
