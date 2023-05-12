@@ -20,8 +20,9 @@ const Checkout = () => {
         const phone = form.phone.value;
         const email = form.email.value || user?.email;
         const message = form.message.value;
+        const status = "pending";
         const orderInfo = {
-            name, bookingDate, phone, email, message, service
+            name, bookingDate, phone, email, message, status, service
         }
         console.log(orderInfo);
         fetch('https://cars-doctor-server-chi.vercel.app/booking', {
@@ -33,7 +34,11 @@ const Checkout = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                if(data.insertedId){
+                    alert("Data inserted successfully");
+                }else{
+                    alert("Sorry data was not inserted");
+                }
             })
 
     }

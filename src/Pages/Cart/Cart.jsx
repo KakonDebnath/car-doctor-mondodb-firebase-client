@@ -15,13 +15,13 @@ const Cart = () => {
 
     const handleDeleteCart = (id) => {
         console.log(id);
-        fetch(`https://cars-doctor-server-chi.vercel.app/cartDelete/${id}`,{
+        fetch(`https://cars-doctor-server-chi.vercel.app/cartDelete/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if(data.deletedCount > 0){
+                if (data.deletedCount > 0) {
                     alert("Successfully Deleted")
                     const remainingData = carts.filter(cart => cart._id !== id);
                     setCart(remainingData);
@@ -29,6 +29,23 @@ const Cart = () => {
             })
     }
 
+    const handleStatusChange = (id) => {
+        const updateStatusData = { status: "confirm" }
+        fetch(`https://cars-doctor-server-chi.vercel.app/cartStatusUpdate/${id}`, {
+            method: 'PATCH',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(updateStatusData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data?.modifiedCount > 0){
+                    alert("Updated successfully");
+                }
+            })
+    }
 
 
     return (
@@ -81,7 +98,7 @@ const Cart = () => {
                                     </td>
                                     <td>${cart?.service?.price}</td>
                                     <th>
-                                        <button className="btn btn-info btn-xs mr-4">Confirm</button>
+                                        <button onClick={() => handleStatusChange(cart?._id)} className={`btn ${cart?.status === "pending" ? 'btn-info' : 'btn-error'} btn-xs mr-4`}>{cart?.status ? cart?.status : "pending"}</button>
                                         <button
                                             onClick={() => handleDeleteCart(cart?._id)}
                                             className="btn btn-error btn-xs">Delete</button>
