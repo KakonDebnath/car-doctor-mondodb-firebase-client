@@ -7,7 +7,7 @@ const Cart = () => {
     const { user } = useContext(AuthContext);
     console.log(carts);
     useEffect(() => {
-        fetch(`http://localhost:5000/cart/?email=${user?.email}`)
+        fetch(`https://cars-doctor-server-chi.vercel.app/cart/?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setCart(data);
