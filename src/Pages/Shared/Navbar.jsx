@@ -10,6 +10,7 @@ const Navbar = () => {
         logOutUser()
             .then(() => {
                 alert('Sign Out Successfully');
+                localStorage.removeItem("car-doctor-access-token");
             })
             .catch((err) => {
                 console.log(err);
@@ -33,7 +34,9 @@ const Navbar = () => {
                         </p>
                         <ul className='bg-slate-100 w-56 z-10 p-5'>
                             <li className='mb-2'><Link to={`/cart`} className='rounded-none'>My Cart</Link></li>
-                            <li><Link onClick={handleLogout} to="/">Logout</Link></li>
+                            <li>
+                                <Link onClick={handleLogout} to="/">Logout</Link>
+                            </li>
                         </ul>
                     </li>
                 </> :

@@ -6,7 +6,12 @@ const Cart = () => {
     const [carts, setCart] = useState([]);
     const { user } = useContext(AuthContext);
     useEffect(() => {
-        fetch(`https://cars-doctor-server-chi.vercel.app/cart/?email=${user?.email}`)
+        fetch(`https://cars-doctor-server-chi.vercel.app/cart/?email=${user?.email}`, {
+            method: 'GET',
+            headers:{
+                authorization : `Bearer ${localStorage.getItem('car-doctor-access-token')}`, 
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setCart(data);
@@ -70,7 +75,7 @@ const Cart = () => {
                     </thead>
                     <tbody>
                         {
-                            carts && carts.map(cart =>
+                            carts && carts?.map(cart =>
                                 <tr key={cart?._id}>
                                     <th>
                                         <label>

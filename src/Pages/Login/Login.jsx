@@ -3,7 +3,7 @@ import Navbar from "../Shared/Navbar";
 import loginImg from "../../assets/images/login/login.svg"
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import { FaGithub, FaGoogle} from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 
 const Login = () => {
@@ -20,7 +20,26 @@ const Login = () => {
         console.log(email, password);
         logInUser(email, password)
             .then((result) => {
-                navigate(from, { replace: true });
+                const user = result.user;
+                const userForJwt = {
+                    email: user.email
+                };
+                console.log(userForJwt);
+                fetch("https://cars-doctor-server-chi.vercel.app/jwt", {
+                    method: 'POST',
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(userForJwt)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem("car-doctor-access-token", data.token);
+                        navigate(from, { replace: true });
+                    })
+
+
             })
             .catch((err) => {
                 console.log(err);
