@@ -25,9 +25,17 @@ const Navbar = () => {
         {
             user ?
                 <>
-                    <li><Link onClick={handleLogout} to="/">Logout</Link></li>
-                    <li><Link to={`/cart`}>My Cart</Link></li>
-                    <li><p className='text-3xl'><FaUserCircle></FaUserCircle></p></li>
+                    <li>
+                        <p>
+                            <span className='text-3xl'><FaUserCircle></FaUserCircle>
+                            </span>
+                            <span>{user?.email}</span>
+                        </p>
+                        <ul className='bg-slate-100 w-56 z-10 p-5'>
+                            <li className='mb-2'><Link to={`/cart`} className='rounded-none'>My Cart</Link></li>
+                            <li><Link onClick={handleLogout} to="/">Logout</Link></li>
+                        </ul>
+                    </li>
                 </> :
                 <li><Link to="/login">Login</Link></li>
         }

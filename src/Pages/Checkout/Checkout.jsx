@@ -12,30 +12,29 @@ const Checkout = () => {
             .then(res => res.json())
             .then(data => setService(data))
     }, [])
-
     const handleBooking = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const bookingDate = form.date.value;
         const phone = form.phone.value;
-        const email = form.email.value || user?.email ;
-        const message = form.message.value ;
+        const email = form.email.value || user?.email;
+        const message = form.message.value;
         const orderInfo = {
             name, bookingDate, phone, email, message, service
         }
         console.log(orderInfo);
         fetch('https://cars-doctor-server-chi.vercel.app/booking', {
             method: "POST",
-            headers:{
+            headers: {
                 "content-type": "application/json"
             },
             body: JSON.stringify(orderInfo)
         })
-        .then(res=>res.json())
-        .then(data => {
-            console.log(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
 
     }
 

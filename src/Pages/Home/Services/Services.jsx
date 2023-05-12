@@ -21,7 +21,7 @@ const Services = () => {
                         />)
                     }
                 </div>
-                <button className="btn btn-outline btn-error mt-12 relative left-1/2 -translate-x-1/2">More Services</button>
+                <button className="text-red-500 border border-red-500 hover:text-white py-3 px-6 rounded-lg hover:bg-red-500 hover:shadow-xl transition-all mt-12 relative left-1/2 -translate-x-1/2">More Services</button>
             </div>
         </div>
     );

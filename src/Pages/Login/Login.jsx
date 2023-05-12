@@ -3,27 +3,28 @@ import Navbar from "../Shared/Navbar";
 import loginImg from "../../assets/images/login/login.svg"
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
+import { FaGithub, FaGoogle} from "react-icons/fa";
 
 
 const Login = () => {
-    const {logInUser} = useContext(AuthContext)
+    const { logInUser } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
-    const from  = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
-        const email = form.email.value; 
+        const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
         logInUser(email, password)
-        .then((result) => {
-            navigate(from, {replace: true});
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+            .then((result) => {
+                navigate(from, { replace: true });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
 
@@ -61,11 +62,12 @@ const Login = () => {
                         </form>
                         <div>
                             <p className="text-lg font-medium text-center">or sign in with</p>
-                            <div>
-
+                            <div className='flex justify-center gap-5 mt-3'>
+                                <Link className='p-3 rounded-full text-xl hover:bg-slate-300'><FaGoogle></FaGoogle></Link>
+                                <Link className='p-3 rounded-full text-xl hover:bg-slate-300'><FaGithub></FaGithub></Link>
                             </div>
                             <p className="text-center">Have an account? <Link to="/register">
-                            <span className="text-[#FF3811]">Sign Up</span></Link></p>
+                                <span className="text-[#FF3811]">Sign Up</span></Link></p>
                         </div>
                     </div>
                 </div>
