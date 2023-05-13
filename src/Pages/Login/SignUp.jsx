@@ -4,6 +4,7 @@ import loginImg from "../../assets/images/login/login.svg"
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import SocialLogin from "./SocialLogin";
 
 
 const SignUp = () => {
@@ -69,11 +70,7 @@ const SignUp = () => {
                             </div>
                         </form>
                         <div>
-                            <p className="text-lg font-medium text-center">or sign in with</p>
-                            <div className='flex justify-center gap-5 mt-3'>
-                                <Link className='p-3 rounded-full text-xl hover:bg-slate-300'><FaGoogle></FaGoogle></Link>
-                                <Link className='p-3 rounded-full text-xl hover:bg-slate-300'><FaGithub></FaGithub></Link>
-                            </div>
+                            <SocialLogin/>
                             <p className="text-center">Have an account? <Link to="/login">
                             <span className="text-[#FF3811]">Log In</span></Link></p>
                         </div>

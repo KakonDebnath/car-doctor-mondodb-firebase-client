@@ -3,7 +3,7 @@ import Navbar from "../Shared/Navbar";
 import loginImg from "../../assets/images/login/login.svg"
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import SocialLogin from "./SocialLogin";
 
 
 const Login = () => {
@@ -17,29 +17,9 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
         logInUser(email, password)
             .then((result) => {
-                const user = result.user;
-                const userForJwt = {
-                    email: user.email
-                };
-                console.log(userForJwt);
-                fetch("http://localhost:5000/jwt", {
-                    method: 'POST',
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify(userForJwt)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        localStorage.setItem("car-doctor-access-token", data.token);
-                        navigate(from, { replace: true });
-                    })
-
-
+                navigate(from, { replace: true });
             })
             .catch((err) => {
                 console.log(err);
@@ -80,11 +60,7 @@ const Login = () => {
                             </div>
                         </form>
                         <div>
-                            <p className="text-lg font-medium text-center">or sign in with</p>
-                            <div className='flex justify-center gap-5 mt-3'>
-                                <Link className='p-3 rounded-full text-xl hover:bg-slate-300'><FaGoogle></FaGoogle></Link>
-                                <Link className='p-3 rounded-full text-xl hover:bg-slate-300'><FaGithub></FaGithub></Link>
-                            </div>
+                            <SocialLogin></SocialLogin>
                             <p className="text-center">Have an account? <Link to="/register">
                                 <span className="text-[#FF3811]">Sign Up</span></Link></p>
                         </div>
