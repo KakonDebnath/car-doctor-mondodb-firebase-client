@@ -7,7 +7,7 @@ const Cart = () => {
     const [carts, setCart] = useState([]);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const url = `http://localhost:5000/cart/?email=${user?.email}`;
+    const url = `https://cars-doctor-server-chi.vercel.app/cart/?email=${user?.email}`;
     useEffect(() => {
         fetch(url, {
             method: 'GET',
