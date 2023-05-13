@@ -25,7 +25,7 @@ const Login = () => {
                     email: user.email
                 };
                 console.log(userForJwt);
-                fetch("https://cars-doctor-server-chi.vercel.app/jwt", {
+                fetch("http://localhost:5000/jwt", {
                     method: 'POST',
                     headers: {
                         "content-type": "application/json",

@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import ShareBanner from "../Shared/ShareBanner";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const [carts, setCart] = useState([]);
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const url = `http://localhost:5000/cart/?email=${user?.email}`;
     useEffect(() => {
-        fetch(`https://cars-doctor-server-chi.vercel.app/cart/?email=${user?.email}`, {
+        fetch(url, {
             method: 'GET',
             headers:{
                 authorization : `Bearer ${localStorage.getItem('car-doctor-access-token')}`, 
@@ -14,9 +17,14 @@ const Cart = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setCart(data);
+                if(data.error){
+                    alert(data.message + "Please Login Again to get data")
+                    navigate('/');
+                }else{
+                    setCart(data);
+                }
             })
-    }, [])
+    }, [url, navigate])
 
     const handleDeleteCart = (id) => {
         console.log(id);
